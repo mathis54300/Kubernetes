@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: postgres-deploy
   namespace: tp1
+  labels:
+    app: postgres
 spec:
   replicas: 1
   selector:
@@ -16,14 +18,16 @@ spec:
       containers:
         - name: postgres
           image: postgres:15
-          ports:
-            - containerPort: 5432
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
