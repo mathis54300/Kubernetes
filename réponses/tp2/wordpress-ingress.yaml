@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - wordpress.local
-      secretName: wordpress-tls
+        - demo1.mp.learn-it.ovh
+      secretName: wordpress-tls-2
   rules:
-    - host: wordpress.local
+    - host: demo1.mp.learn-it.ovh
       http:
         paths:
           - path: /
